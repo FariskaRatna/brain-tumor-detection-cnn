@@ -13,9 +13,9 @@ from cnn_model import cnn_model
 with open("custom.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.title('Bag Classifier')
+st.title('Brain Tumor Classifier')
 
-st.markdown("Welcome to this simple web application that classifies bags. The bags are classified into six different classes namely: Backpack, Briefcase, Duffle, Handbag and Purse.")
+st.markdown("Welcome to this simple web application that classifies brain tumors. The tumors are classified into four different classes namely: Glioma Tumor, No Tumor, Meningioma Tumor, and Pituitary Tumor.")
 
 
 def main():
@@ -38,8 +38,18 @@ def main():
                 st.write(predictions)
                 st.pyplot(fig)
 
+def download_model(url, filename):
+    response = requests.get(url)
+    with open(filename, 'wb') as f:
+        f.write(response.content)
+
 def predict(image_path):
-    classifier_model='https://github.com/FariskaRatna/brain-tumor-detection-cnn/releases/download/v1/best_23cnn.weights.h5'
+    classifier_model = 'best_23cnn.weights.h5'
+    model_url='https://github.com/FariskaRatna/brain-tumor-detection-cnn/releases/download/v1/best_23cnn.weights.h5'
+
+    if not os.path.exists(classifier_model):
+        download_model(model_url, classifier_model)
+
     IMAGE_SHAPE=(512,512,3)
     model = cnn_model()
     model.load_weights(classifier_model)
