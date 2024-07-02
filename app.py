@@ -25,7 +25,7 @@ def download_model(url, filename):
     with open(filename, 'wb') as f:
         f.write(response.content)
 
-def predict(image_path):
+def predict(image):
     classifier_model = 'best_23cnn.weights.h5'
     model_url='https://github.com/FariskaRatna/brain-tumor-detection-cnn/releases/download/v1/best_23cnn.weights.h5'
 
@@ -36,7 +36,7 @@ def predict(image_path):
     model = cnn_model()
     model.load_weights(classifier_model)
     # image = Image.open(image_path)
-    test_image = image_path.resize((IMAGE_SHAPE[0], IMAGE_SHAPE[1]))
+    test_image = image.resize((IMAGE_SHAPE[0], IMAGE_SHAPE[1]))
     test_image = np.array(test_image)
     test_image = np.expand_dims(test_image, axis=0)
     class_names = [
