@@ -5,7 +5,7 @@ from PIL import Image
 from cnn_model import cnn_model
 
 def predict(image_path):
-    classifier_model='model//best_23cnn.weights.h5'
+    classifier_model='https://github.com/FariskaRatna/brain-tumor-detection-cnn/releases/download/v1/best_23cnn.weights.h5'
     IMAGE_SHAPE=(512,512,3)
     model = cnn_model()
     model.load_weights(classifier_model)
